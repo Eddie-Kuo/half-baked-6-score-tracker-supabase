@@ -1,5 +1,5 @@
 import { getGames, createGame } from './fetch-utils.js';
-import { renderGame, renderTeam } from './render-utils.js';
+import { renderGame } from './render-utils.js';
 
 const currentGameEl = document.getElementById('current-game-container');
 const pastGamesEl = document.getElementById('past-games-container');
@@ -27,7 +27,6 @@ nameForm.addEventListener('submit', (event) => {
     // set the state to this data from the form
     const teamOne = data.get('team-one');
     const teamTwo = data.get('team-two');
-
     name1 = teamOne;
     name2 = teamTwo;
     // reset the form values
@@ -85,7 +84,7 @@ function displayCurrentGameEl() {
     // change the label to show team two's name;
     teamTwoLabel.textContent = name2;
     // call the render game function to create a game element
-    const gameEl = renderGame(name1, name2, score1, score2);
+    const gameEl = renderGame(name1, score1, name2, score2);
     // append the element to the cleared out current game div
     currentGameEl.append(gameEl);
 }
