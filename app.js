@@ -3,7 +3,7 @@ import { renderGame } from './render-utils.js';
 
 const currentGameEl = document.getElementById('current-game-container');
 const pastGamesEl = document.getElementById('past-games-container');
-const logoutButton = document.getElementById('logout');
+// const logoutButton = document.getElementById('logout');
 
 const nameForm = document.getElementById('name-form');
 const teamOneAddButton = document.getElementById('team-one-add-button');
@@ -62,22 +62,28 @@ teamTwoSubtractButton.addEventListener('click', () => {
 
 finishGameButton.addEventListener('click', async () => {
     // create a new game using the current game state
-    const pastEl = renderGame({ name1, score1, name2, score2 });
-    pastGamesEl.append(pastEl);
-    console.log(pastGamesEl);
+    const gameData = {
+        name1: name1,
+        name2: name2,
+        score1: score1,
+        score2: score2,
+    };
     // after creating this new game, re-fetch the games to get the updated state and display them (hint: call displayAllGames())
 
+    const response = await createGame(gameData);
     name1 = '';
     name2 = '';
     score1 = 0;
     score2 = 0;
 
+    displayAllGames(response);
     displayCurrentGameEl();
 });
 
 // on load . . .
-window.addEventListener('', async () => {
+window.addEventListener('load', async () => {
     // display all past games (hint: call displayAllGames())
+    displayAllGames();
 });
 
 function displayCurrentGameEl() {
@@ -93,10 +99,16 @@ function displayCurrentGameEl() {
     currentGameEl.append(gameEl);
 }
 
-function displayAllGames() {
+async function displayAllGames() {
     // clear out the past games list in the DOM
+    pastGamesEl.textContent = '';
     // FETCH ALL GAMES from supabase
+    const games = await getGames();
     // loop through the past games
+    for (let game of games) {
+        const div = renderGame(game);
+        pastGamesEl.append(div);
+    }
     // render and append a past game for each past game in state
 }
 
