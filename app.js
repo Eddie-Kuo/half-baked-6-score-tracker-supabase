@@ -31,30 +31,32 @@ nameForm.addEventListener('submit', (event) => {
     name2 = teamTwo;
     // reset the form values
     nameForm.reset();
+    score1 = 0;
+    score2 = 0;
     displayCurrentGameEl();
 });
 
 teamOneAddButton.addEventListener('click', () => {
     // increment the current state for team one's score
-
+    score1++;
     displayCurrentGameEl();
 });
 
 teamTwoAddButton.addEventListener('click', () => {
     // increment the current state for team two's score
-
+    score2++;
     displayCurrentGameEl();
 });
 
 teamOneSubtractButton.addEventListener('click', () => {
     // decrement the current state for team one's score
-
+    score1--;
     displayCurrentGameEl();
 });
 
 teamTwoSubtractButton.addEventListener('click', () => {
     // decrement the current state for team two's score
-
+    score2--;
     displayCurrentGameEl();
 });
 
