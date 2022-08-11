@@ -62,7 +62,9 @@ teamTwoSubtractButton.addEventListener('click', () => {
 
 finishGameButton.addEventListener('click', async () => {
     // create a new game using the current game state
-
+    const pastEl = renderGame({ name1, score1, name2, score2 });
+    pastGamesEl.append(pastEl);
+    console.log(pastGamesEl);
     // after creating this new game, re-fetch the games to get the updated state and display them (hint: call displayAllGames())
 
     name1 = '';
@@ -86,7 +88,7 @@ function displayCurrentGameEl() {
     // change the label to show team two's name;
     teamTwoLabel.textContent = name2;
     // call the render game function to create a game element
-    const gameEl = renderGame(name1, score1, name2, score2);
+    const gameEl = renderGame({ name1, score1, name2, score2 });
     // append the element to the cleared out current game div
     currentGameEl.append(gameEl);
 }
